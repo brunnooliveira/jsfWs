@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>JsfWs</title>
+	<c:set var="ctx" value="#{request.contextPath}" scope="request" />
+</h:head>
+<h:body>
+	<h2>JsfWs</h2>
+	<h:form>
+
+		<p:outputLabel for="wordInput" value="Type a 'word' to search" />
+		<p:spacer width="20px" />
+		<p:inputText id="wordInput" value="#{indexController.searchWord}" />
+
+		<p:commandButton actionListener="#{indexController.search}"
+			value="Search" update="resultPanel" />
+
+		<p:ajaxStatus style="width:16px;height:16px; display:inline;" id="ajaxStatusPanel">
+			<f:facet name="start">
+				<h:outputText value="Searching..." />				
+			</f:facet>
+
+			<f:facet name="complete">
+				<h:outputText value="" />
+			</f:facet>
+		</p:ajaxStatus>
+
+		<p:panel id="resultPanel">
+			<ui:repeat var="def" value="#{indexController.definitions}">
+				<h3>#{def.word}</h3>
+				<p>#{def.wordDefinition}</p>
+			</ui:repeat>
+		</p:panel>
+
+	</h:form>
+</h:body>
+</html>

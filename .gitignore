@@ -1,0 +1,9 @@
+bin/
+build/
+!etc/lib/build
+*.class
+.DS_Store
+target/
+.classpath
+.project
+.settings
