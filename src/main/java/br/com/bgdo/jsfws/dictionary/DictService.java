@@ -44,25 +44,25 @@ public class DictService
         super(__getWsdlLocation(), DICTSERVICE_QNAME);
     }
 
-    public DictService(WebServiceFeature... features) {
-        super(__getWsdlLocation(), DICTSERVICE_QNAME, features);
-    }
+//    public DictService(WebServiceFeature... features) {
+//        super(__getWsdlLocation(), DICTSERVICE_QNAME, features);
+//    }
 
     public DictService(URL wsdlLocation) {
         super(wsdlLocation, DICTSERVICE_QNAME);
     }
 
-    public DictService(URL wsdlLocation, WebServiceFeature... features) {
-        super(wsdlLocation, DICTSERVICE_QNAME, features);
-    }
+//    public DictService(URL wsdlLocation, WebServiceFeature... features) {
+//        super(wsdlLocation, DICTSERVICE_QNAME, features);
+//    }
 
     public DictService(URL wsdlLocation, QName serviceName) {
         super(wsdlLocation, serviceName);
     }
 
-    public DictService(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
-        super(wsdlLocation, serviceName, features);
-    }
+//    public DictService(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
+//        super(wsdlLocation, serviceName, features);
+//    }
 
     /**
      * 
