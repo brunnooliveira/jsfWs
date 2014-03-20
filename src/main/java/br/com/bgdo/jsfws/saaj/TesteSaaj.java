@@ -23,12 +23,11 @@ public class TesteSaaj {
 	public static void main(String[] args) throws Exception {
 		testeSaaj();
 	}
-	
-	
+
 	public static void testeSaaj() throws SOAPException, MalformedURLException {
 		MessageFactory mf = MessageFactory
 				.newInstance(SOAPConstants.SOAP_1_2_PROTOCOL);
-		
+
 		SOAPMessage message = mf.createMessage();
 		SOAPPart soapPart = message.getSOAPPart();
 		SOAPEnvelope envelope = soapPart.getEnvelope();
@@ -38,25 +37,27 @@ public class TesteSaaj {
 		// SOAPHeader header2 = message.getSOAPHeader();
 		// SOAPBody body2 = message.getSOAPBody();
 
-		//Exluir header
-//		header.detachNode();
-		
-		QName bodyName = new QName("http://wombat.ztrade.com", "GetLastTradePrice", "m");
+		// Exluir header
+		// header.detachNode();
+
+		QName bodyName = new QName("http://wombat.ztrade.com",
+				"GetLastTradePrice", "m");
 		SOAPBodyElement bodyElement = body.addBodyElement(bodyName);
-		
+
 		QName name = new QName("symbol");
 		SOAPElement symbol = bodyElement.addChildElement(name);
 		symbol.addTextNode("SUNW");
 
-		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory
+				.newInstance();
 		SOAPConnection connection = soapConnectionFactory.createConnection();
-		
+
 		URL endpoint = new URL("http://wombat.ztrade.com/quotes");
-		
+
 		SOAPMessage response = connection.call(message, endpoint);
-		
-		System.out.println(response.toString()); 
-		
+
+		System.out.println(response.toString());
+
 	}
 
 }
