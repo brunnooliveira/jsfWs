@@ -6,11 +6,15 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.xml.ws.Binding;
+import javax.xml.ws.BindingProvider;
+import javax.xml.ws.handler.Handler;
 
 import br.com.bgdo.jsfws.dictionary.Definition;
 import br.com.bgdo.jsfws.dictionary.DictService;
 import br.com.bgdo.jsfws.dictionary.DictServiceSoap;
 import br.com.bgdo.jsfws.dictionary.WordDefinition;
+import br.com.bgdo.jsfws.handler.TestHandler;
 
 @ManagedBean
 @ViewScoped
@@ -26,6 +30,13 @@ public class IndexController implements Serializable {
 
         DictService service = new DictService();
         DictServiceSoap port = service.getDictServiceSoap();
+        ((BindingProvider)port).getRequestContext().put("TESTE_PARAM", "testando parametro handler");
+        
+        Binding binding = ((BindingProvider)port).getBinding();
+        List<Handler> handlerList = binding.getHandlerChain();
+        handlerList.add(new TestHandler());
+        binding.setHandlerChain(handlerList);
+        
         WordDefinition define = port.define(searchWord);
 
         if (define != null && define.getDefinitions() != null) {
@@ -36,9 +47,9 @@ public class IndexController implements Serializable {
             definitions = new ArrayList<Definition>();
         }
 
-        for (Definition def : definitions) {
-            System.out.println(def.getWordDefinition());
-        }
+		// for (Definition def : definitions) {
+		// System.out.println(def.getWordDefinition());
+		// }
 
     }
 
