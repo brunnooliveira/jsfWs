@@ -32,6 +32,7 @@ public class IndexController implements Serializable {
         DictServiceSoap port = service.getDictServiceSoap();
         ((BindingProvider)port).getRequestContext().put("TESTE_PARAM", "testando parametro handler");
         
+        //Adding a handler
         Binding binding = ((BindingProvider)port).getBinding();
         List<Handler> handlerList = binding.getHandlerChain();
         handlerList.add(new TestHandler());
